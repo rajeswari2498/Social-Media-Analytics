@@ -25,7 +25,8 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
+    politicaldata= pd.read_csv(filename)
+    return politicaldata
 
 
 '''
@@ -210,69 +211,70 @@ def graphHashtagSentimentByFrequency(data):
 Expects 3 lists - one of x labels, one of data labels, and one of data values - and a title.
 You can use it to graph any number of datasets side-by-side to compare and contrast.
 """
-def sideBySideBarPlots(xLabels, labelList, valueLists, title):
-    import matplotlib.pyplot as plt
+# def sideBySideBarPlots(xLabels, labelList, valueLists, title):
+#     import matplotlib.pyplot as plt
 
-    w = 0.8 / len(labelList)  # the width of the bars
-    xPositions = []
-    for dataset in range(len(labelList)):
-        xValues = []
-        for i in range(len(xLabels)):
-            xValues.append(i - 0.4 + w * (dataset + 0.5))
-        xPositions.append(xValues)
+#     w = 0.8 / len(labelList)  # the width of the bars
+#     xPositions = []
+#     for dataset in range(len(labelList)):
+#         xValues = []
+#         for i in range(len(xLabels)):
+#             xValues.append(i - 0.4 + w * (dataset + 0.5))
+#         xPositions.append(xValues)
 
-    for index in range(len(valueLists)):
-        plt.bar(xPositions[index], valueLists[index], width=w, label=labelList[index])
+#     for index in range(len(valueLists)):
+#         plt.bar(xPositions[index], valueLists[index], width=w, label=labelList[index])
 
-    plt.xticks(ticks=list(range(len(xLabels))), labels=xLabels, rotation="vertical")
-    plt.legend()
-    plt.title(title)
+#     plt.xticks(ticks=list(range(len(xLabels))), labels=xLabels, rotation="vertical")
+#     plt.legend()
+#     plt.title(title)
 
-    plt.show()
+#     plt.show()
 
-"""
-Expects two lists of probabilities and a list of labels (words) all the same length
-and plots the probabilities of x and y, labels each point, and puts a title on top.
-Expects that the y axis will be from -1 to 1. If you want a different y axis, change plt.ylim
-"""
-def scatterPlot(xValues, yValues, labels, title):
-    import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
+# """
+# Expects two lists of probabilities and a list of labels (words) all the same length
+# and plots the probabilities of x and y, labels each point, and puts a title on top.
+# Expects that the y axis will be from -1 to 1. If you want a different y axis, change plt.ylim
+# """
+# def scatterPlot(xValues, yValues, labels, title):
+#     import matplotlib.pyplot as plt
+#     fig, ax = plt.subplots()
 
-    plt.scatter(xValues, yValues)
+#     plt.scatter(xValues, yValues)
 
-    # make labels for the points
-    for i in range(len(labels)):
-        plt.annotate(labels[i], # this is the text
-                    (xValues[i], yValues[i]), # this is the point to label
-                    textcoords="offset points", # how to position the text
-                    xytext=(0, 10), # distance from text to points (x,y)
-                    ha='center') # horizontal alignment can be left, right or center
+#     # make labels for the points
+#     for i in range(len(labels)):
+#         plt.annotate(labels[i], # this is the text
+#                     (xValues[i], yValues[i]), # this is the point to label
+#                     textcoords="offset points", # how to position the text
+#                     xytext=(0, 10), # distance from text to points (x,y)
+#                     ha='center') # horizontal alignment can be left, right or center
 
-    plt.title(title)
-    plt.ylim(-1, 1)
+#     plt.title(title)
+#     plt.ylim(-1, 1)
 
-    # a bit of advanced code to draw a line on y=0
-    ax.plot([0, 1], [0.5, 0.5], color='black', transform=ax.transAxes)
+#     # a bit of advanced code to draw a line on y=0
+#     ax.plot([0, 1], [0.5, 0.5], color='black', transform=ax.transAxes)
 
-    plt.show()
+#     plt.show()
 
 
 ### RUN CODE ###
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    test.testMakeDataFrame()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
 
-    ## Uncomment these for Week 2 ##
-    """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
-    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()"""
+    # ## Uncomment these for Week 2 ##
+    # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    # test.week2Tests()
+    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek2()"""
 
-    ## Uncomment these for Week 3 ##
-    """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()"""
+    # ## Uncomment these for Week 3 ##
+    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek3()"""
