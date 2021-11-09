@@ -36,7 +36,13 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    first_name=fromString.find(" ")
+    slicing1_name=fromString[first_name:]
+    last_name=slicing1_name.find("(")
+    slicing2_name=slicing1_name[:last_name]
+    slicing2_name=slicing2_name.strip()
+    # print(slicing2_name)
+    return slicing2_name
 
 
 '''
@@ -46,7 +52,13 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    first_position=fromString.find("(")
+    slicing1_position=fromString[first_position+1:]
+    last_position=slicing1_position.find(" from")
+    slicing2_position=slicing1_position[:last_position]
+    slicing2_position=slicing2_position.strip()
+    # print(slicing2_position)
+    return slicing2_position
 
 
 '''
@@ -56,7 +68,13 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    first_state=fromString.find("from ")
+    slicing1_state=fromString[first_state+4:]
+    last_state=slicing1_state.find(") ")
+    slicing2_state=slicing1_state[:last_state]
+    slicing2_state=slicing2_state.strip()
+    # print(slicing2_state)
+    return slicing2_state
 
 
 '''
@@ -264,6 +282,9 @@ You can use it to graph any number of datasets side-by-side to compare and contr
 # This code runs the test cases to check your work
 if __name__ == "__main__":
     test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
