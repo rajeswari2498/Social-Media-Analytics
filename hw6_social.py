@@ -224,7 +224,14 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-    return
+    hashtag_dictionary={}
+    for index,row in data.iterrows():
+        for each in row["hashtags"]:
+            if each not in hashtag_dictionary:
+                hashtag_dictionary[each]=1
+            else:
+                hashtag_dictionary[each]+=1
+    return hashtag_dictionary
 
 
 '''
@@ -370,6 +377,7 @@ if __name__ == "__main__":
     addSentimentColumn(df)
     test.testGetDataCountByState(df)
     test.testGetDataForRegion(df)
+    test.testGetHashtagRates(df)
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
