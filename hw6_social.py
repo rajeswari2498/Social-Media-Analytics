@@ -207,8 +207,15 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
-
+    nested_dictionary={}
+    for index,row in data.iterrows():
+        nested_dictionary[row["region"]]={}
+    for index,row in data.iterrows():
+        if row[colName] not in nested_dictionary[row["region"]]:
+            nested_dictionary[row["region"]][row[colName]]=1
+        else:
+            nested_dictionary[row["region"]][row[colName]]+=1
+    return nested_dictionary
 
 '''
 getHashtagRates(data)
@@ -362,6 +369,7 @@ if __name__ == "__main__":
     addColumns(df, stateDf)
     addSentimentColumn(df)
     test.testGetDataCountByState(df)
+    test.testGetDataForRegion(df)
     # ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
