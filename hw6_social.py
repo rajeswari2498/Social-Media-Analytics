@@ -16,6 +16,7 @@ nltk.download('vader_lexicon', quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
+from collections import Counter
 endChars = [ " ", "\n", "#", ".", ",", "?", "!", ":", ";", ")" ]
 
 '''
@@ -311,6 +312,12 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
+    features_rate={}
+    biggest_states={}
+    for each in stateFeatureCounts:
+        features_rate[each]=(stateFeatureCounts[each],stateCounts[each])
+    biggest_states=dict(Counter(features_rate).most_common(n))
+    graphStateCounts(biggest_states,title)
     return
 
 
@@ -398,11 +405,11 @@ if __name__ == "__main__":
     # test.testFindHashtags()
     # test.testGetRegionFromState()
     # test.testAddColumns()
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
-    # df = makeDataFrame("data/politicaldata.csv")
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    # # df = makeDataFrame("data/politicaldata.csv")
     # stateDf = makeDataFrame("data/statemappings.csv")
     # addColumns(df, stateDf)
 
@@ -418,11 +425,11 @@ if __name__ == "__main__":
     # test.testMostCommonHashtags(df)
     # test.testGetHashtagSentiment(df)
     ## Uncomment these for Week 2 ##
-    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
-    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()
-    
+    # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    # test.week2Tests()
+    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek2()
+
     # ## Uncomment these for Week 3 ##
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
