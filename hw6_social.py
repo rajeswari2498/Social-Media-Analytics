@@ -42,7 +42,6 @@ def parseName(fromString):
     last_name=slicing1_name.find("(")
     slicing2_name=slicing1_name[:last_name]
     slicing2_name=slicing2_name.strip()
-    # print(slicing2_name)
     return slicing2_name
 
 
@@ -96,7 +95,6 @@ def findHashtags(message):
             else:
                 break
         list.append(empty_string)
-    # print(list)
     return list
 
 
@@ -108,7 +106,6 @@ Returns: str
 '''
 def getRegionFromState(stateDf, state):
     row = stateDf.loc[stateDf['state'] == state, 'region']
-    # print(row)
     return row.values[0]
 
 
@@ -314,8 +311,10 @@ Returns: None
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
     features_rate={}
     biggest_states={}
+    # print(stateCounts,stateFeatureCounts)
     for each in stateFeatureCounts:
-        features_rate[each]=(stateFeatureCounts[each],stateCounts[each])
+        features_rate[each]=(stateFeatureCounts[each]/stateCounts[each])
+    # print(features_rate)
     biggest_states=dict(Counter(features_rate).most_common(n))
     graphStateCounts(biggest_states,title)
     return
@@ -355,6 +354,16 @@ Parameters: dataframe
 Returns: None
 '''
 def graphHashtagSentimentByFrequency(data):
+    dict_mapping=getHashtagRates(data)
+    common_hashtag=mostCommonHashtags(dict_mapping,50)
+    list_hashtag=[]
+    list_frequencies=[]
+    list_sentiments=[]
+    for each in common_hashtag:
+        list_hashtag.append(each)
+        list_frequencies.append(common_hashtag[each])
+        list_sentiments.append(getHashtagSentiment(data,each))
+    scatterPlot(list_frequencies,list_sentiments, list_hashtag, "Hashtags frequency")
     return
 
 
@@ -424,11 +433,11 @@ if __name__ == "__main__":
     # test.testAddColumns()
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
-    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek1()
-    # # df = makeDataFrame("data/politicaldata.csv")
-    # stateDf = makeDataFrame("data/statemappings.csv")
-    # addColumns(df, stateDf)
+    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek1()
+    df = makeDataFrame("data/politicaldata.csv")
+    stateDf = makeDataFrame("data/statemappings.csv")
+    addColumns(df, stateDf)
 
     # test.testFindSentiment()
     # test.testAddSentimentColumn()
@@ -441,11 +450,11 @@ if __name__ == "__main__":
     # test.testGetHashtagRates(df)
     # test.testMostCommonHashtags(df)
     # test.testGetHashtagSentiment(df)
-    ## Uncomment these for Week 2 ##
-    # print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    # test.week2Tests()
-    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek2()
+    # Uncomment these for Week 2 ##
+    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    test.week2Tests()
+    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek2()
 
     # ## Uncomment these for Week 3 ##
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
